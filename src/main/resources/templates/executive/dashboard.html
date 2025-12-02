@@ -1,0 +1,52 @@
+<!-- src/main/resources/templates/executive/dashboard.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>📊 总经理决策看板</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .card { border: 1px solid #ccc; padding: 15px; margin: 10px 0; border-radius: 8px; }
+        h2 { color: #2c3e50; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+<h1>🏨 阳光酒店 · 总经理决策看板</h1>
+
+<!-- 客源分析 -->
+<div class="card">
+    <h2>👥 客源年龄构成</h2>
+    <table>
+        <tr><th>年龄段</th><th>人数</th></tr>
+        <tr th:each="entry : ${guestAgeStats}">
+            <td th:text="${entry.key}"></td>
+            <td th:text="${entry.value}"></td>
+        </tr>
+    </table>
+</div>
+
+<!-- 经营状况 -->
+<div class="card">
+    <h2>💰 收入构成分析</h2>
+    <table>
+        <tr><th>收入类型</th><th>金额（元）</th></tr>
+        <tr th:each="entry : ${revenueBreakdown}">
+            <td th:text="${entry.key}"></td>
+            <td th:text="${#numbers.formatDecimal(entry.value, 1, 2)}"></td>
+        </tr>
+    </table>
+</div>
+
+<!-- 内部管理 -->
+<div class="card">
+    <h2>🏢 内部资源配置</h2>
+    <p>员工与房间配置比例：<strong th:text="${employeeRoomRatio}"></strong></p>
+    <p>当前客房入住率：<strong th:text="${roomOccupancy}"></strong></p>
+</div>
+
+<p><a href="/">← 返回首页</a></p>
+</body>
+</html>

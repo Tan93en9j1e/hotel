@@ -56,8 +56,8 @@ public class InventoryController {
         return "inventory/stock-report";
     }
 
-    @GetMapping("/stock-index")
+    @GetMapping("/index")
     public String stockIndex() {
-        return "stock-index";
+        return "inventory/stock-index";
     }
 }

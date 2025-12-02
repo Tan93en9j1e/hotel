@@ -1,15 +1,155 @@
-<!-- finance-index.html -->
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head><title>财务中心</title></head>
+<html xmlns:th="http://www.thymeleaf.org" lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>📊 财务管理中心</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px 0;
+        }
+        header h1 {
+            font-size: 2.2rem;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 22px;
+        }
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+            text-align: center;
+            transition: all 0.25s ease;
+            border-top: 4px solid #3498db;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+        }
+        .card h3 {
+            font-size: 1.25rem;
+            margin: 16px 0 12px;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .card a {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 20px;
+            background: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+        .card a:hover {
+            background: #2980b9;
+        }
+
+        /* 不同模块使用不同颜色 */
+        .card.account { border-top-color: #2ecc71; }
+        .card.voucher { border-top-color: #e74c3c; }
+        .card.ledger { border-top-color: #9b59b6; }
+        .card.report { border-top-color: #f39c12; }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        footer a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+            header h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
 <body>
-<h2>📊 财务中心</h2>
-<ul>
-    <li><a href="/account-list">会计科目设置</a></li>
-    <li><a href="/voucher-form">新增凭证</a></li>
-    <li><a href="/ledger?account=1001">查看明细账</a></li>
-    <li><a href="/financial-reports">财务报表</a></li>
-</ul>
-<p><a href="/">← 返回首页</a></p>
+<div class="container">
+    <header>
+        <h1>📊 财务管理中心</h1>
+        <p>一站式会计处理平台 · 科目 · 凭证 · 账簿 · 报表</p>
+    </header>
+
+    <div class="dashboard">
+        <!-- 会计科目 -->
+        <div class="card account">
+            <div style="font-size: 2.2rem;">📁</div>
+            <h3>会计科目设置</h3>
+            <p>管理资产、负债、收入、费用等科目</p>
+            <a href="/accounting/accounts">进入科目</a>
+        </div>
+
+        <!-- 新增凭证 -->
+        <div class="card voucher">
+            <div style="font-size: 2.2rem;">📝</div>
+            <h3>新增会计凭证</h3>
+            <p>录入日常经济业务的会计分录</p>
+            <a href="/accounting/voucher/new">创建凭证</a>
+        </div>
+
+        <!-- 明细账 -->
+        <div class="card ledger">
+            <div style="font-size: 2.2rem;">📖</div>
+            <h3>明细账查询</h3>
+            <p>查看各科目的详细交易记录</p>
+            <a href="/accounting/accounts">选择科目</a>
+        </div>
+
+        <!-- 财务报表 -->
+        <div class="card report">
+            <div style="font-size: 2.2rem;">📈</div>
+            <h3>财务报表</h3>
+            <p>生成资产负债表与利润表</p>
+            <a href="/accounting/reports">查看报表</a>
+        </div>
+    </div>
+
+    <footer>
+        <a href="/">← 返回酒店管理系统首页</a>
+    </footer>
+</div>
 </body>
 </html>

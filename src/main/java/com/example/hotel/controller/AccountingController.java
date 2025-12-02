@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Arrays;
-import java.util.List;
 
 @Controller
 @RequestMapping("/accounting")
 public class AccountingController {
 
-    @Autowired private AccountingService accountingService;
+    @Autowired
+    private AccountingService accountingService;
 
     // 科目列表
     @GetMapping("/accounts")
@@ -71,8 +71,8 @@ public class AccountingController {
         return "accounting/financial-reports";
     }
 
-    @GetMapping("/finance-index")
+    @GetMapping("/index") // 访问 /accounting/index
     public String financeIndex() {
-        return "finance-index";
+        return "accounting/finance-index"; // 对应 templates/accounting/index.html
     }
 }
