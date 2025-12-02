@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>话费收据 - [[${roomNumber}]]</title>
+    <style>
+        body { font-family: SimSun, serif; }
+        .receipt { max-width: 600px; margin: 20px auto; padding: 20px; border: 1px dashed #000; }
+        .header { text-align: center; margin-bottom: 20px; }
+        .item { display: flex; justify-content: space-between; }
+        .total { font-weight: bold; margin-top: 10px; }
+    </style>
+</head>
+<body>
+<div class="receipt">
+    <div class="header">
+        <h3>🏨 酒店话费收据</h3>
+        <p>房间号：[[${roomNumber}]]</p>
+        <p>日期：[[${#temporals.format(new java.util.Date(), 'yyyy年MM月dd日')}]]</p>
+    </div>
+
+    <div th:each="call : ${calls}" class="item">
+        <span>[[${call.phoneNumber}]] ([[${call.durationMinutes}]] 分钟)</span>
+        <span>¥[[${#numbers.formatDecimal(call.cost, 1, 2)}]]</span>
+    </div>
+
+    <div class="total item">
+        <span>合计：</span>
+        <span>¥[[${#numbers.formatDecimal(total, 1, 2)}]]</span>
+    </div>
+
+    <div class="text-center mt-4">
+        <button onclick="window.print()" class="btn btn-primary">🖨️ 打印</button>
+        <a th:href="@{/phone/calls(roomNumber=${roomNumber})}" class="btn btn-secondary ms-2">返回</a>
+    </div>
+</div>
+</body>
+</html>
