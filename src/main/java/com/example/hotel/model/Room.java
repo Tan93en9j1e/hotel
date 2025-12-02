@@ -1,11 +1,16 @@
 package com.example.hotel.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+@Setter
+@Getter
 @Entity
 @Table(name = "rooms")
 public class Room {
 
+    // Getters and Setters
     @Id
     private String roomNumber; // 如 "101", "205"
 
@@ -25,19 +30,4 @@ public class Room {
         this.status = "空闲";
     }
 
-    // Getters and Setters
-    public String getRoomNumber() { return roomNumber; }
-    public void setRoomNumber(String roomNumber) { this.roomNumber = roomNumber; }
-
-    public String getStatus() { return status; }
-    public void setStatus(String status) { this.status = status; }
-
-    public String getItems() { return items; }
-    public void setItems(String items) { this.items = items; }
-
-    public String getCurrentGuestName() { return currentGuestName; }
-    public void setCurrentGuestName(String currentGuestName) { this.currentGuestName = currentGuestName; }
-
-    public String getGuestMessage() { return guestMessage; }
-    public void setGuestMessage(String guestMessage) { this.guestMessage = guestMessage; }
 }

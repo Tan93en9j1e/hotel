@@ -2,8 +2,12 @@
 package com.example.hotel.model;
 
 import jakarta.persistence.*;
-import java.math.BigDecimal;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.math.BigDecimal;
+@Getter
+@Setter
 @Entity
 @Table(name = "bill_items")
 public class BillItem {
@@ -19,15 +23,5 @@ public class BillItem {
     private BigDecimal amount;
     private String category; // room, phone, dining, laundry, other
 
-    // Getters and Setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
-    public Bill getBill() { return bill; }
-    public void setBill(Bill bill) { this.bill = bill; }
-    public String getDescription() { return description; }
-    public void setDescription(String description) { this.description = description; }
-    public BigDecimal getAmount() { return amount; }
-    public void setAmount(BigDecimal amount) { this.amount = amount; }
-    public String getCategory() { return category; }
-    public void setCategory(String category) { this.category = category; }
+
 }

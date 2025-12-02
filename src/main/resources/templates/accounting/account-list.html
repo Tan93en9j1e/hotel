@@ -1,0 +1,22 @@
+<!-- templates/accounting/account-list.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="utf-8"><title>会计科目</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"></head>
+<body>
+<div class="container mt-4">
+    <h2>📊 会计科目设置</h2>
+    <a href="/accounting/voucher/new" class="btn btn-primary mb-3">➕ 新增凭证</a>
+    <table class="table table-bordered">
+        <thead><tr><th>编码</th><th>名称</th><th>类别</th></tr></thead>
+        <tbody>
+        <tr th:each="acc : ${accounts}">
+            <td th:text="${acc.code}"></td>
+            <td th:text="${acc.name}"></td>
+            <td th:text="${acc.category.label}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

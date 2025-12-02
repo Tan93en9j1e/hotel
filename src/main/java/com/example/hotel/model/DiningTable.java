@@ -1,7 +1,11 @@
 package com.example.hotel.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "dining_tables")
 public class DiningTable {
@@ -18,9 +22,5 @@ public class DiningTable {
         this.status = "空闲";
     }
 
-    // Getters and Setters
-    public String getTableNumber() { return tableNumber; }
-    public void setTableNumber(String tableNumber) { this.tableNumber = tableNumber; }
-    public String getStatus() { return status; }
-    public void setStatus(String status) { this.status = status; }
+
 }

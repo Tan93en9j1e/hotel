@@ -1,0 +1,25 @@
+<!-- templates/inventory/stock-report.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="utf-8"><title>库存台账</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"></head>
+<body>
+<div class="container mt-4">
+    <h2>📒 [[${item.name}]] 库存台账</h2>
+    <p>当前库存：<strong>[[${item.stockQty}]] [[${item.unit}]]</strong></p>
+    <a href="/inventory" class="btn btn-secondary mb-3">← 返回库存清单</a>
+    <table class="table">
+        <thead><tr><th>时间</th><th>类型</th><th>数量</th><th>金额</th><th>备注</th></tr></thead>
+        <tbody>
+        <tr th:each="tx : ${history}">
+            <td th:text="${#temporals.format(tx.time, 'yyyy-MM-dd HH:mm')}"></td>
+            <td th:text="${tx.type == 'IN' ? '入库' : '出库'}"></td>
+            <td th:text="${tx.quantity}"></td>
+            <td>¥[[${#numbers.formatDecimal(tx.amount, 1, 2)}]]</td>
+            <td th:text="${tx.remark} ?: '-'"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
