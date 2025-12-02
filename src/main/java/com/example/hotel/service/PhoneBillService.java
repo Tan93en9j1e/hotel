@@ -1,7 +1,7 @@
 // src/main/java/com/example/hotel/service/PhoneBillService.java
 package com.example.hotel.service;
 
-import com.example.hotel.entity.PhoneCall;
+import com.example.hotel.model.PhoneCall;
 import com.example.hotel.repository.PhoneCallRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

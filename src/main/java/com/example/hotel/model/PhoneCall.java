@@ -1,5 +1,5 @@
 // src/main/java/com/example/hotel/model/PhoneCall.java
-package com.example.hotel.entity;
+package com.example.hotel.model;
 
 import jakarta.persistence.*;
 import java.math.BigDecimal;

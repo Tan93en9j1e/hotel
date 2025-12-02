@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>员工列表 - 人事工资系统</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-4">
+    <h2>👥 员工列表</h2>
+    <a href="/payroll/new" class="btn btn-success mb-3 ms-2">➕ 新增员工</a>
+    <a href="/" class="btn btn-secondary mb-3">← 返回首页</a>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>姓名</th>
+            <th>性别</th>
+            <th>年龄</th>
+            <th>学历</th>
+            <th>职务</th>
+            <th>基本工资</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="emp : ${employees}">
+            <td th:text="${emp.id}"></td>
+            <td th:text="${emp.name}"></td>
+            <td th:text="${emp.gender}"></td>
+            <td th:text="${emp.age}"></td>
+            <td th:text="${emp.education}"></td>
+            <td th:text="${emp.position}"></td>
+            <td>¥[[${#numbers.formatDecimal(emp.baseSalary, 1, 2)}]]</td>
+            <td><a th:href="@{/payroll/{id}(id=${emp.id})}" class="btn btn-sm btn-primary">查看详情</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

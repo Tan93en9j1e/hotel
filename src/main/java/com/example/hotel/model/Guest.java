@@ -1,4 +1,4 @@
-package com.example.hotel.entity;
+package com.example.hotel.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;

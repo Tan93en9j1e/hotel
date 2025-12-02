@@ -1,7 +1,7 @@
 package com.example.hotel.service;
 
-import com.example.hotel.entity.DiningTable;
-import com.example.hotel.entity.OrderItem;
+import com.example.hotel.model.DiningTable;
+import com.example.hotel.model.OrderItem;
 import com.example.hotel.repository.DiningTableRepository;
 import com.example.hotel.repository.OrderItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;

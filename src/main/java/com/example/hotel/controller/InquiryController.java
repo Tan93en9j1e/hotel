@@ -1,7 +1,7 @@
 // src/main/java/com/example/hotel/controller/InquiryController.java
 package com.example.hotel.controller;
 
-import com.example.hotel.entity.ServiceGuideItem;
+import com.example.hotel.model.ServiceGuideItem;
 import com.example.hotel.service.InquiryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

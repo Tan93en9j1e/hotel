@@ -1,6 +1,6 @@
 package com.example.hotel.service;
 
-import com.example.hotel.entity.Room;
+import com.example.hotel.model.Room;
 import com.example.hotel.repository.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,7 +1,7 @@
 // src/main/java/com/example/hotel/repository/ServiceGuideItemRepository.java
 package com.example.hotel.repository;
 
-import com.example.hotel.entity.ServiceGuideItem;
+import com.example.hotel.model.ServiceGuideItem;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import java.util.List;

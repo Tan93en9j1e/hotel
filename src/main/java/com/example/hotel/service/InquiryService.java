@@ -1,14 +1,13 @@
 // src/main/java/com/example/hotel/service/InquiryService.java
 package com.example.hotel.service;
 
-import com.example.hotel.entity.ServiceGuideItem;
+import com.example.hotel.model.ServiceGuideItem;
 import com.example.hotel.repository.ServiceGuideItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @Service
 public class InquiryService {

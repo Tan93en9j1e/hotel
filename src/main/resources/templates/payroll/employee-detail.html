@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>员工详情 - [[${employee.name}]]</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-4">
+    <h2>👤 员工详情：[[${employee.name}]]</h2>
+    <a href="/payroll" class="btn btn-secondary mb-3">← 返回员工列表</a>
+
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <p><strong>ID：</strong> [[${employee.id}]]</p>
+            <p><strong>性别：</strong> [[${employee.gender}]]</p>
+            <p><strong>年龄：</strong> [[${employee.age}]]</p>
+            <p><strong>学历：</strong> [[${employee.education}]]</p>
+            <p><strong>职务：</strong> [[${employee.position}]]</p>
+            <p><strong>基本工资：</strong> ¥[[${#numbers.formatDecimal(employee.baseSalary, 1, 2)}]]</p>
+        </div>
+    </div>
+
+    <h4>💰 工资计算</h4>
+    <form th:action="@{/payroll/calculate}" method="post" class="mb-4">
+        <input type="hidden" name="empId" th:value="${employee.id}" />
+        <div class="row g-2">
+            <div class="col-md-4">
+                <label for="yearMonth" class="form-label">选择月份</label>
+                <input type="month" class="form-control" id="yearMonth" name="yearMonth" required />
+            </div>
+            <div class="col-md-4 d-flex align-items-end">
+                <button type="submit" class="btn btn-success">生成/更新工资记录</button>
+            </div>
+        </div>
+    </form>
+
+    <!-- 显示最近工资记录（简化版） -->
+    <h5>📊 最近工资记录（需在 Service 中扩展查询）</h5>
+    <p class="text-muted">（本示例未实现历史记录查询，仅展示表单功能）</p>
+
+</div>
+</body>
+</html>

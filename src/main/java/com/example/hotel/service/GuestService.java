@@ -1,6 +1,6 @@
 package com.example.hotel.service;
 
-import com.example.hotel.entity.Guest;
+import com.example.hotel.model.Guest;
 import com.example.hotel.repository.GuestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

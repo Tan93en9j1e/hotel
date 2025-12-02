@@ -1,7 +1,7 @@
 // src/main/java/com/example/hotel/repository/PhoneCallRepository.java
 package com.example.hotel.repository;
 
-import com.example.hotel.entity.PhoneCall;
+import com.example.hotel.model.PhoneCall;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import java.util.List;

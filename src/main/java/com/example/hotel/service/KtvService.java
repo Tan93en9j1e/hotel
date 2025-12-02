@@ -1,7 +1,7 @@
 package com.example.hotel.service;
 
-import com.example.hotel.entity.KtvRoom;
-import com.example.hotel.entity.SongOrder;
+import com.example.hotel.model.KtvRoom;
+import com.example.hotel.model.SongOrder;
 import com.example.hotel.repository.KtvRoomRepository;
 import com.example.hotel.repository.SongOrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;

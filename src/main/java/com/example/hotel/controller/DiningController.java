@@ -1,7 +1,7 @@
 package com.example.hotel.controller;
 
-import com.example.hotel.entity.DiningTable;
-import com.example.hotel.entity.OrderItem;
+import com.example.hotel.model.DiningTable;
+import com.example.hotel.model.OrderItem;
 import com.example.hotel.service.DiningService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
