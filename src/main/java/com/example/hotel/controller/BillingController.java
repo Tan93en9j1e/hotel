@@ -31,11 +31,10 @@ public class BillingController {
 
     @GetMapping("/{id}")
     public String billDetail(@PathVariable Long id, Model model) {
-        Bill bill = billingService.getActiveBillByRoom(
-                billingService.getUnsettledBills().stream()
-                        .filter(b -> b.getId().equals(id))
-                        .findFirst().get().getRoomNumber()
-        );
+        Bill bill = billingService.getUnsettledBills().stream()
+                .filter(b -> b.getId().equals(id))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("账单不存在或已结算"));
         model.addAttribute("bill", bill);
         return "billing/bill-detail";
     }

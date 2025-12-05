@@ -2,23 +2,171 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>饭店服务指南</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #0d6efd, #0b5ed7);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: 600;
+        }
+        .nav-link {
+            display: inline-block;
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            margin-top: 12px;
+            font-size: 14px;
+        }
+        .nav-link:hover {
+            text-decoration: underline;
+        }
+
+        .section {
+            padding: 25px 30px;
+            border-bottom: 1px solid #eee;
+        }
+        .section:last-child {
+            border-bottom: none;
+        }
+        .section-title {
+            font-size: 20px;
+            color: #0d6efd;
+            margin-bottom: 20px;
+            padding-left: 10px;
+            border-left: 4px solid #0d6efd;
+        }
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+        }
+        .category-card {
+            background: #fafafa;
+            border: 1px solid #e9ecef;
+            border-radius: 10px;
+            padding: 20px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+        }
+        .category-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-color: #0d6efd;
+        }
+        .category-icon {
+            font-size: 28px;
+            margin-bottom: 12px;
+            color: #0d6efd;
+        }
+        .category-title {
+            font-weight: 600;
+            font-size: 18px;
+            margin: 0 0 8px 0;
+            color: #212529;
+        }
+        .category-desc {
+            font-size: 14px;
+            color: #6c757d;
+            line-height: 1.5;
+        }
+
+        .footer-note {
+            text-align: center;
+            padding: 20px;
+            color: #6c757d;
+            font-size: 14px;
+            background: #f8f9fa;
+        }
+    </style>
 </head>
 <body>
-<div class="container mt-4">
-    <h2>📘 饭店服务指南</h2>
-    <a href="/" class="btn btn-secondary mb-3">返回首页</a>
+<div class="container">
+    <div class="header">
+        <h1>📘 饭店服务指南</h1>
+        <a href="/" class="nav-link">← 返回首页</a>
+    </div>
 
-    <div class="row g-4">
-        <div class="col-md-4" th:each="cat : ${categories}">
-            <div class="card">
-                <div class="card-body text-center">
-                    <h5 class="card-title" th:text="${labels.getCategoryLabel(cat)}"></h5>
-                    <a th:href="@{/inquiry/{cat}(cat=${cat})}" class="btn btn-outline-primary">查看详情</a>
-                </div>
-            </div>
+    <!-- 住宿与房间 -->
+    <div class="section">
+        <h2 class="section-title">🏨 住宿与房间</h2>
+        <div class="category-grid">
+            <a th:href="@{/inquiry/room}" class="category-card">
+                <div class="category-icon">🛏️</div>
+                <h3 class="category-title">客房实景</h3>
+                <p class="category-desc">了解各类房型配置、设施与景观</p>
+            </a>
+            <a th:href="@{/inquiry/layout}" class="category-card">
+                <div class="category-icon">🏢</div>
+                <h3 class="category-title">楼层布局</h3>
+                <p class="category-desc">快速找到餐厅、会议室、KTV等位置</p>
+            </a>
         </div>
+    </div>
+
+    <!-- 餐饮娱乐 -->
+    <div class="section">
+        <h2 class="section-title">🍽️ 餐饮与娱乐</h2>
+        <div class="category-grid">
+            <a th:href="@{/inquiry/dining}" class="category-card">
+                <div class="category-icon">🥢</div>
+                <h3 class="category-title">餐厅实景</h3>
+                <p class="category-desc">查看用餐环境、营业时间与服务</p>
+            </a>
+            <a th:href="@{/inquiry/dish}" class="category-card">
+                <div class="category-icon">🍲</div>
+                <h3 class="category-title">特色菜肴</h3>
+                <p class="category-desc">品尝西湖醋鱼、东坡肉等杭帮名菜</p>
+            </a>
+            <a th:href="@{/inquiry/ktv}" class="category-card">
+                <div class="category-icon">🎤</div>
+                <h3 class="category-title">KTV包房</h3>
+                <p class="category-desc">了解包房类型、营业时间与点歌服务</p>
+            </a>
+        </div>
+    </div>
+
+    <!-- 商务与位置 -->
+    <div class="section">
+        <h2 class="section-title">💼 商务与位置</h2>
+        <div class="category-grid">
+            <a th:href="@{/inquiry/meeting}" class="category-card">
+                <div class="category-icon">📊</div>
+                <h3 class="category-title">会议室</h3>
+                <p class="category-desc">查看会议厅配置、设备与预订方式</p>
+            </a>
+            <a th:href="@{/inquiry/location}" class="category-card">
+                <div class="category-icon">📍</div>
+                <h3 class="category-title">地理位置</h3>
+                <p class="category-desc">交通指引、周边景点与接驳服务</p>
+            </a>
+        </div>
+    </div>
+
+    <div class="footer-note">
+        如需人工帮助，请拨打前台电话：0571-XXXX XXXX
     </div>
 </div>
 </body>
