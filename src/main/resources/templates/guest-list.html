@@ -1,0 +1,99 @@
+<!-- File: src/main/resources/templates/guest-list.html -->
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title>客人列表 - 阳光酒店管理系统</title>
+</head>
+<body>
+<div layout:fragment="content">
+
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h2>👥 客人列表</h2>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <a href="/guests/new" class="btn btn-success">➕ 新增客人</a>
+        </div>
+    </div>
+
+    <!-- 搜索表单 -->
+    <form method="get" action="/guests" class="mb-3">
+        <div class="row g-2">
+            <div class="col-auto">
+                <input type="text" class="form-control" name="search" th:value="${searchQuery}" placeholder="按姓名或房间号搜索">
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-outline-secondary">🔍 搜索</button>
+                <a th:if="${searchQuery != null and not #strings.isEmpty(searchQuery)}" href="/guests" class="btn btn-outline-primary">🔄 显示全部</a>
+            </div>
+        </div>
+    </form>
+
+    <!-- 客人表格 -->
+    <div class="card">
+        <div class="card-body">
+            <div th:if="${#lists.isEmpty(guests)}" class="alert alert-info">
+                暂无客人信息。
+            </div>
+            <div th:unless="${#lists.isEmpty(guests)}">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover align-middle">
+                        <thead class="table-dark">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">姓名</th>
+                            <th scope="col">性别</th>
+                            <th scope="col">籍贯</th>
+                            <th scope="col">工作单位</th>
+                            <th scope="col">职业</th>
+                            <th scope="col">事由</th>
+                            <th scope="col">入住日期</th>
+                            <th scope="col">预定离店</th>
+                            <th scope="col">房间号</th>
+                            <th scope="col">状态</th>
+                            <th scope="col">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="guest : ${guests}">
+                            <td th:text="${guest.id}"></td>
+                            <td th:text="${guest.name}"></td>
+                            <td th:text="${guest.gender} ?: '-'"></td>
+                            <td th:text="${guest.hometown} ?: '-'"></td>
+                            <td th:text="${guest.workUnit} ?: '-'"></td>
+                            <td th:text="${guest.occupation} ?: '-'"></td>
+                            <td th:text="${guest.purpose} ?: '-'"></td>
+                            <td th:text="${#temporals.format(guest.checkInDate, 'yyyy-MM-dd')} ?: '-'"></td>
+                            <td th:text="${#temporals.format(guest.expectedCheckOutDate, 'yyyy-MM-dd')} ?: '-'"></td>
+                            <td th:text="${guest.roomNumber} ?: '-'"></td>
+                            <td>
+                                    <span th:classappend="${guest.stillCheckedIn ? 'badge bg-success' : 'badge bg-secondary'}"
+                                          th:text="${guest.statusDescription}">
+                                        状态
+                                    </span>
+                            </td>
+                            <td>
+                                <a th:href="@{/guests/edit/{id}(id=${guest.id})}" class="btn btn-sm btn-outline-primary">✏️ 编辑</a>
+                                <a href="#" th:onclick="'confirmDelete(\'' + @{/guests/delete/{id}(id=${guest.id})} + '\'); return false;'"
+                                   class="btn btn-sm btn-outline-danger">🗑️ 删除</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    function confirmDelete(deleteUrl) {
+        if (confirm('确定要删除这位客人吗？此操作不可撤销！')) {
+            window.location.href = deleteUrl;
+        }
+    }
+    /*]]>*/
+</script>
+</body>
+</html>

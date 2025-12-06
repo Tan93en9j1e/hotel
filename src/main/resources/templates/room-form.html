@@ -1,0 +1,108 @@
+<!-- File: src/main/resources/templates/room-form.html -->
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title>客房信息 - 阳光酒店管理系统</title>
+</head>
+<body>
+<div layout:fragment="content">
+
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h2>🛏️ 客房信息</h2>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            客房表单
+        </div>
+        <div class="card-body">
+            <form th:action="@{/rooms}" th:object="${room}" method="post" th:if="${room.roomNumber == null}">
+                <!-- 新增房间 -->
+                <input type="hidden" name="_method" value="POST" />
+                <div class="mb-3">
+                    <label for="roomNumber" class="form-label">房间号 *</label>
+                    <input type="text" class="form-control" id="roomNumber" th:field="*{roomNumber}" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">状态</label>
+                    <div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="status" id="statusFree" value="空闲" th:field="*{status}" disabled>
+                            <label class="form-check-label" for="statusFree">空闲</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="status" id="statusOccupied" value="占用" th:field="*{status}" disabled>
+                            <label class="form-check-label" for="statusOccupied">占用</label>
+                        </div>
+                        <!-- 新增时，默认是空闲，且不可更改 -->
+                        <input type="hidden" th:field="*{status}" value="空闲" />
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="currentGuestName" class="form-label">当前客人姓名</label>
+                    <input type="text" class="form-control" id="currentGuestName" th:field="*{currentGuestName}" readonly>
+                </div>
+                <div class="mb-3">
+                    <label for="items" class="form-label">客房物品种类及状态</label>
+                    <textarea class="form-control" id="items" rows="3" th:field="*{items}"></textarea>
+                    <div class="form-text">例如: "电视:正常,空调:故障,床:干净"</div>
+                </div>
+                <div class="mb-3">
+                    <label for="guestMessage" class="form-label">客人留言</label>
+                    <textarea class="form-control" id="guestMessage" rows="2" th:field="*{guestMessage}"></textarea>
+                </div>
+                <hr class="my-4">
+                <div class="d-flex justify-content-end gap-2">
+                    <button type="submit" class="btn btn-primary">💾 保存</button>
+                    <a href="/rooms" class="btn btn-secondary">↩️ 取消</a>
+                </div>
+            </form>
+
+            <form th:action="@{'/rooms/update/' + ${room.roomNumber}}" th:object="${room}" method="post" th:unless="${room.roomNumber == null}">
+                <!-- 编辑房间 -->
+                <input type="hidden" name="_method" value="POST" />
+                <input type="hidden" th:field="*{roomNumber}" /> <!-- 房间号不允许修改 -->
+
+                <div class="mb-3">
+                    <label for="displayRoomNumber" class="form-label">房间号</label>
+                    <input type="text" class="form-control" id="displayRoomNumber" th:value="*{roomNumber}" readonly>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">状态</label>
+                    <div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="status" id="statusFreeEdit" value="空闲" th:field="*{status}">
+                            <label class="form-check-label" for="statusFreeEdit">空闲</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="status" id="statusOccupiedEdit" value="占用" th:field="*{status}">
+                            <label class="form-check-label" for="statusOccupiedEdit">占用</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="currentGuestNameEdit" class="form-label">当前客人姓名</label>
+                    <input type="text" class="form-control" id="currentGuestNameEdit" th:field="*{currentGuestName}">
+                </div>
+                <div class="mb-3">
+                    <label for="itemsEdit" class="form-label">客房物品种类及状态</label>
+                    <textarea class="form-control" id="itemsEdit" rows="3" th:field="*{items}"></textarea>
+                    <div class="form-text">例如: "电视:正常,空调:故障,床:干净"</div>
+                </div>
+                <div class="mb-3">
+                    <label for="guestMessageEdit" class="form-label">客人留言</label>
+                    <textarea class="form-control" id="guestMessageEdit" rows="2" th:field="*{guestMessage}"></textarea>
+                </div>
+                <hr class="my-4">
+                <div class="d-flex justify-content-end gap-2">
+                    <button type="submit" class="btn btn-primary">💾 保存</button>
+                    <a href="/rooms" class="btn btn-secondary">↩️ 取消</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

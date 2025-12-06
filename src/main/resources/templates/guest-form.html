@@ -1,0 +1,113 @@
+<!-- File: src/main/resources/templates/guest-form.html -->
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title th:text="${title}">客人登记</title>
+</head>
+<body>
+<div layout:fragment="content">
+
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h2 th:text="${title}">客人登记</h2>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            登记表
+        </div>
+        <div class="card-body">
+            <form th:action="@{${action}}" th:object="${guest}" method="post">
+
+                <!-- 隐藏域用于传递ID (编辑时) -->
+                <input type="hidden" th:field="*{id}" />
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="name" class="form-label">姓名 *</label>
+                        <input type="text" class="form-control" id="name" th:field="*{name}" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">性别</label>
+                        <div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="gender" id="genderMale" value="男" th:field="*{gender}">
+                                <label class="form-check-label" for="genderMale">男</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="gender" id="genderFemale" value="女" th:field="*{gender}">
+                                <label class="form-check-label" for="genderFemale">女</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="hometown" class="form-label">籍贯</label>
+                        <input type="text" class="form-control" id="hometown" th:field="*{hometown}">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="workUnit" class="form-label">工作单位</label>
+                        <input type="text" class="form-control" id="workUnit" th:field="*{workUnit}">
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="occupation" class="form-label">职业</label>
+                        <input type="text" class="form-control" id="occupation" th:field="*{occupation}">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="purpose" class="form-label">住店事由</label>
+                        <input type="text" class="form-control" id="purpose" th:field="*{purpose}">
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="checkInDate" class="form-label">入住日期</label>
+                        <input type="date" class="form-control" id="checkInDate" th:field="*{checkInDate}" readonly>
+                        <!-- 入住日期由系统自动设置，用户不能修改 -->
+                    </div>
+                    <div class="col-md-6">
+                        <label for="expectedCheckOutDate" class="form-label">预定离店日期 *</label>
+                        <input type="date" class="form-control" id="expectedCheckOutDate" th:field="*{expectedCheckOutDate}" required>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <!-- 修改这里：将 input 改为 select -->
+                        <label for="roomNumber" class="form-label">房间号</label>
+                        <select class="form-select" id="roomNumber" th:field="*{roomNumber}">
+                            <option value="">-- 请选择房间 --</option>
+                            <!-- 循环 availableRooms 列表生成 option -->
+                            <option th:each="room : ${availableRooms}"
+                                    th:value="${room.roomNumber}"
+                                    th:text="${room.roomNumber +  ' (' + room.status + ')'}"
+                                    th:selected="${room.roomNumber == guest.roomNumber}">
+                                房间号 (状态)
+                            </option>
+                        </select>
+                        <div class="form-text">仅显示空闲房间。编辑时可能包含当前房间。</div>
+                    </div>
+                    <div class="col-md-6">
+                        <!-- 换房记录作为只读信息展示 -->
+                        <label for="roomChangeRecords" class="form-label">换房记录</label>
+                        <textarea class="form-control" id="roomChangeRecords" rows="2" th:field="*{roomChangeRecords}" readonly></textarea>
+                    </div>
+                </div>
+
+                <hr class="my-4">
+                <div class="d-flex justify-content-end gap-2">
+                    <button type="submit" class="btn btn-primary">💾 保存</button>
+                    <a href="/guests" class="btn btn-secondary">↩️ 取消</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

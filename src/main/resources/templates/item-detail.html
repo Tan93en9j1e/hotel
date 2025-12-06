@@ -1,0 +1,47 @@
+<!-- File: src/main/resources/templates/inquiry/item-detail.html -->
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title th:text="${label} + ' - 饭店服务指南'">服务指南详情</title>
+    <style>
+        .service-item {
+            border-left: 4px solid #0d6efd; /* Primary color */
+            padding-left: 1rem;
+            margin-bottom: 2rem;
+        }
+        .service-item-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        .service-item-description {
+            white-space: pre-line; /* 保留换行符 */
+        }
+    </style>
+</head>
+<body>
+<div layout:fragment="content">
+
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h2>📘 饭店服务指南 - <span th:text="${label}">类别</span></h2>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <a href="/inquiry" class="btn btn-outline-secondary">← 返回指南首页</a>
+        </div>
+    </div>
+
+    <div th:if="${#lists.isEmpty(items)}" class="alert alert-info">
+        暂无相关介绍内容。
+    </div>
+
+    <div th:unless="${#lists.isEmpty(items)}">
+        <div class="service-item" th:each="item : ${items}">
+            <div class="service-item-title" th:text="${item.title}">服务项目标题</div>
+            <div class="service-item-description text-muted" th:text="${item.description}">描述内容</div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

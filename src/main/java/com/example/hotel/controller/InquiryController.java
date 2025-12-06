@@ -24,7 +24,7 @@ public class InquiryController {
         List<String> categories = inquiryService.getCategories();
         model.addAttribute("categories", categories);
         model.addAttribute("labels", inquiryService);
-        return "inquiry/guide";
+        return "guide";
     }
 
     @GetMapping("/{category}")
@@ -33,6 +33,6 @@ public class InquiryController {
         model.addAttribute("category", category);
         model.addAttribute("label", inquiryService.getCategoryLabel(category));
         model.addAttribute("items", items);
-        return "inquiry/item-detail";
+        return "item-detail";
     }
 }

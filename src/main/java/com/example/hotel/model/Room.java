@@ -29,5 +29,8 @@ public class Room {
         this.roomNumber = roomNumber;
         this.status = "空闲";
     }
+    // 关联当前入住的客人（可为空）
+    @OneToOne(mappedBy = "room", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Guest currentGuest;
 
 }

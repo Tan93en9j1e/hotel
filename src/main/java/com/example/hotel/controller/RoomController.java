@@ -31,10 +31,20 @@ public class RoomController {
 
     @PostMapping
     public String createRoom(@ModelAttribute Room room) {
-        if (roomService.getRoomByNumber(room.getRoomNumber()).isEmpty()) {
-            room.setStatus("空闲");
-            roomService.saveRoom(room);
+        if (roomService.getRoomByNumber(room.getRoomNumber()).isPresent()) {
+            // 房间已存在，可返回错误或忽略
+            return "redirect:/rooms";
         }
+
+        // 根据是否有客人自动设置状态
+        if (room.getCurrentGuestName() != null && !room.getCurrentGuestName().trim().isEmpty()) {
+            room.setStatus("占用");
+        } else {
+            room.setStatus("空闲");
+            room.setCurrentGuestName(null); // 清空更干净
+        }
+
+        roomService.saveRoom(room);
         return "redirect:/rooms";
     }
 
@@ -56,4 +66,5 @@ public class RoomController {
         roomService.deleteRoom(number);
         return "redirect:/rooms";
     }
+
 }
