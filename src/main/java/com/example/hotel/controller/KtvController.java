@@ -22,13 +22,13 @@ public class KtvController {
     @GetMapping("/rooms")
     public String listRooms(Model model) {
         model.addAttribute("rooms", ktvService.getAllRooms());
-        return "ktv/room-list";
+        return "ktvroom-list";
     }
 
     @GetMapping("/rooms/new")
     public String newRoomForm(Model model) {
         model.addAttribute("room", new KtvRoom());
-        return "ktv/room-form";
+        return "ktvroom-form";
     }
 
     @PostMapping("/rooms")
@@ -41,7 +41,7 @@ public class KtvController {
     public String editRoomForm(@PathVariable String number, Model model) {
         model.addAttribute("room", ktvService.getAllRooms().stream()
                 .filter(r -> r.getRoomNumber().equals(number)).findFirst().orElse(new KtvRoom()));
-        return "ktv/room-form";
+        return "ktvroom-form";
     }
 
     @PostMapping("/rooms/update/{number}")
@@ -79,7 +79,7 @@ public class KtvController {
         model.addAttribute("roomNumber", roomNumber);
         model.addAttribute("songs", songs);
         model.addAttribute("total", total);
-        return "ktv/bill";
+        return "ktv-bill";
     }
 
     @GetMapping("/settle/{roomNumber}")

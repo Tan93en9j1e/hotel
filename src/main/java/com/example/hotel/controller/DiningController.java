@@ -79,7 +79,7 @@ public class DiningController {
         model.addAttribute("tableNumber", tableNumber);
         model.addAttribute("items", items);
         model.addAttribute("total", total);
-        return "dining/bill";
+        return "dining-bill";
     }
 
     @GetMapping("/settle/{tableNumber}")
