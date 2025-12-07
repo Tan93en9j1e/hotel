@@ -21,13 +21,13 @@ public class GuestController {
     public String listGuests(Model model) {
         List<Guest> guests = guestService.getAllGuests();
         model.addAttribute("guests", guests);
-        return "guest/list";
+        return "/guest/guest-list";
     }
 
     @GetMapping("/new")
     public String showCreateForm(Model model) {
         model.addAttribute("guest", new Guest());
-        return "guest/form";
+        return "/guest/guest-form";
     }
 
     @PostMapping
@@ -40,7 +40,7 @@ public class GuestController {
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable Long id, Model model) {
         guestService.getGuestById(id).ifPresent(g -> model.addAttribute("guest", g));
-        return "guest/form";
+        return "guest/guest-form";
     }
 
     @PostMapping("/update/{id}")

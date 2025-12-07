@@ -20,13 +20,13 @@ public class RoomController {
     public String listRooms(Model model) {
         List<Room> rooms = roomService.getAllRooms();
         model.addAttribute("rooms", rooms);
-        return "room/list";
+        return "room/room-list";
     }
 
     @GetMapping("/new")
     public String showCreateForm(Model model) {
         model.addAttribute("room", new Room());
-        return "room/form";
+        return "room/room-form";
     }
 
     @PostMapping
@@ -41,7 +41,7 @@ public class RoomController {
     @GetMapping("/edit/{number}")
     public String showEditForm(@PathVariable String number, Model model) {
         roomService.getRoomByNumber(number).ifPresent(r -> model.addAttribute("room", r));
-        return "room/form";
+        return "room/room-form";
     }
 
     @PostMapping("/update/{number}")
