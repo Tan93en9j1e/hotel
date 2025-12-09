@@ -19,5 +19,5 @@ public class ServiceGuideItem {
     private String category;        // 分类：location, layout, room, dining, ktv, meeting, dish
     private String description;     // 描述
     private String imageUrl;        // 图片路径（如 /images/guide/dining1.jpg）
-
+    private String contact;
 }
