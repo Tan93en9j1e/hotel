@@ -29,4 +29,7 @@ public class GuestService {
     public void deleteGuest(Long id) {
         guestRepository.deleteById(id);
     }
+    public List<Guest> getGuestsByGroupId(Long groupId) {
+        return guestRepository.findByGroupId(groupId);
+    }
 }

@@ -14,7 +14,7 @@ public class Guest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    private Long groupId; // 外键，指向 GuestGroup.id；null 表示散客
     private String name;
     private String gender; // 男 / 女
     private String hometown;
