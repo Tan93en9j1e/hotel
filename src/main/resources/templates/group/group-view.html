@@ -1,84 +1,166 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>团体详情 - 酒店系统</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <meta charset="UTF-8">
+    <title>团体详情 - 酒店管理系统</title>
     <style>
-        body { background-color: #f8f9fa; padding-top: 20px; }
-        .info-card { background-color: #f1f8ff; border-left: 4px solid #0d6efd; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            padding: 2rem;
+        }
+        .container { max-width: 1000px; margin: 0 auto; }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        h1 {
+            font-size: 1.8rem;
+            color: #1e40af;
+            font-weight: 700;
+        }
+        .back-link {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .info-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .info-card {
+            background: white;
+            padding: 1.2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+        .info-card .label {
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-bottom: 0.4rem;
+        }
+        .info-card .value {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        .section-title {
+            font-size: 1.2rem;
+            margin: 2rem 0 1rem;
+            color: #1e40af;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .section-title::before {
+            content: "👥";
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        th {
+            background: #f1f5f9;
+            padding: 0.9rem;
+            text-align: left;
+            font-weight: 600;
+            color: #334155;
+        }
+        td {
+            padding: 0.9rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        tr:last-child td { border-bottom: none; }
+
+        .empty-members {
+            text-align: center;
+            padding: 2rem;
+            color: #64748b;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
     </style>
 </head>
 <body>
-<nav class="navbar navbar-dark bg-dark py-2">
-    <div class="container">
-        <a class="navbar-brand" href="/groups"><i class="fas fa-arrow-left me-2"></i>返回团体列表</a>
-    </div>
-</nav>
+<div class="container">
+    <header>
+        <h1>团体详情</h1>
+        <a href="/groups" class="back-link">← 返回列表</a>
+    </header>
 
-<div class="container mt-4">
-    <h2 class="mb-4"><i class="fas fa-users me-2 text-success"></i>团体详情</h2>
-
-    <div class="card shadow-sm info-card mb-4">
-        <div class="card-body">
-            <dl class="row mb-0">
-                <dt class="col-sm-3">团体名称</dt>
-                <dd class="col-sm-9" th:text="${group.groupName}"></dd>
-
-                <dt class="col-sm-3">联系人</dt>
-                <dd class="col-sm-9" th:text="${group.contactPerson}"></dd>
-
-                <dt class="col-sm-3">联系电话</dt>
-                <dd class="col-sm-9" th:text="${group.contactPhone ?: '—'}"></dd>
-
-                <dt class="col-sm-3">住店事由</dt>
-                <dd class="col-sm-9" th:text="${group.purpose ?: '—'}"></dd>
-
-                <dt class="col-sm-3">入住日期</dt>
-                <dd class="col-sm-9" th:text="${#dates.format(group.checkInDate, 'yyyy-MM-dd')}"></dd>
-
-                <dt class="col-sm-3">预定离店</dt>
-                <dd class="col-sm-9" th:text="${group.expectedCheckOutDate != null ? #dates.format(group.expectedCheckOutDate, 'yyyy-MM-dd') : '—'}"></dd>
-
-                <dt class="col-sm-3">主房间号</dt>
-                <dd class="col-sm-9" th:text="${group.mainRoomNumber ?: '—'}"></dd>
-            </dl>
+    <div class="info-cards">
+        <div class="info-card">
+            <div class="label">团体名称</div>
+            <div class="value" th:text="${group.groupName} ?: '—'"></div>
+        </div>
+        <div class="info-card">
+            <div class="label">联系人</div>
+            <div class="value" th:text="${group.contactPerson} ?: '—'"></div>
+        </div>
+        <div class="info-card">
+            <div class="label">联系电话</div>
+            <div class="value" th:text="${group.contactPhone} ?: '—'"></div>
+        </div>
+        <div class="info-card">
+            <div class="label">事由</div>
+            <div class="value" th:text="${group.purpose} ?: '—'"></div>
+        </div>
+        <div class="info-card">
+            <div class="label">入住日期</div>
+            <div class="value" th:text="${#temporals.format(group.checkInDate, 'yyyy-MM-dd')} ?: '未指定'"></div>
+        </div>
+        <div class="info-card">
+            <div class="label">预定离店</div>
+            <div class="value" th:text="${#temporals.format(group.expectedCheckOutDate, 'yyyy-MM-dd')} ?: '未指定'"></div>
         </div>
     </div>
 
-    <h4 class="mb-3">👥 成员列表（共 <span th:text="${members.size()}"></span> 人）</h4>
-    <div class="card shadow-sm">
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-bordered">
-                    <thead class="table-light">
-                    <tr>
-                        <th>姓名</th>
-                        <th>性别</th>
-                        <th>籍贯</th>
-                        <th>单位</th>
-                        <th>职业</th>
-                        <th>房间号</th>
-                        <th>换房记录</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="m : ${members}">
-                        <td th:text="${m.name}"></td>
-                        <td th:text="${m.gender}"></td>
-                        <td th:text="${m.hometown ?: '—'}"></td>
-                        <td th:text="${m.workUnit ?: '—'}"></td>
-                        <td th:text="${m.occupation ?: '—'}"></td>
-                        <td th:text="${m.roomNumber ?: '—'}"></td>
-                        <td th:text="${m.roomChangeRecords ?: '—'}"></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+    <h2 class="section-title">成员列表</h2>
+
+    <div th:if="${members.empty}">
+        <div class="empty-members">
+            <p>该团体暂无成员</p>
         </div>
     </div>
+
+    <table th:unless="${members.empty}">
+        <thead>
+        <tr>
+            <th>姓名</th>
+            <th>性别</th>
+            <th>房间号</th>
+            <th>籍贯</th>
+            <th>工作单位</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="member : ${members}">
+            <td th:text="${member.name} ?: '—'"></td>
+            <td th:text="${member.gender} ?: '—'"></td>
+            <td th:text="${member.roomNumber} ?: '未分配'"></td>
+            <td th:text="${member.hometown} ?: '—'"></td>
+            <td th:text="${member.workUnit} ?: '—'"></td>
+        </tr>
+        </tbody>
+    </table>
 </div>
 </body>
 </html>

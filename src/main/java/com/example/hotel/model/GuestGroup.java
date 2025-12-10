@@ -25,8 +25,5 @@ public class GuestGroup {
     private LocalDate checkInDate;      // 入住日期
     private LocalDate expectedCheckOutDate; // 预定离店日期
 
-    // 可选：主房间号（如团长房间）
-    private String mainRoomNumber;
-
     // 注：不直接维护 Guest 列表以避免级联复杂性，通过 Guest.groupId 关联
 }
